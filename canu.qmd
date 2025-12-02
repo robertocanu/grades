@@ -183,3 +183,13 @@ grades_per_student |>
   knitr::kable()
 ```
 
+
+### Question 14
+```{r}
+grades_per_student |>
+    ggplot(aes(x = `Number of grades`, fill = factor(Sex))) + 
+  geom_density(bw = 1, alpha = 0.3) +
+  labs(x = "Number of grades", y = "Density", fill = "Sex")
+```
+
+
