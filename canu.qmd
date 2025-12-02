@@ -287,3 +287,30 @@ pivoted_avg_grades_per_student |>
   knitr::kable()
 ```
 
+### Question 22
+```{r}
+best_group <-pivoted_avg_grades_per_student |>
+  summarise(correlation = cor(
+      `Astronomy and Celestial Navigation`,
+      `Tribal Lore and Traditions`),
+    .by = group) |>
+  slice_max(abs(correlation)) |>
+  pull(group)
+```
+
+The group where the grades in `Tribal Lore and Traditions` and in `Astronomy and Celestial Navigation` are more correlated is **`r best_group`**.
+
+```{r}
+pivoted_avg_grades_per_student |>
+  filter(group == best_group) |>
+  ggplot(aes(
+    x = `Tribal Lore and Traditions`,
+    y = `Astronomy and Celestial Navigation`)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    x = "Average grade in Tribal Lore and Traditions",
+    y = "Average grade in Astronomy and Celestial Navigation"
+  )
+```
+
