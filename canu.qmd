@@ -189,9 +189,9 @@ grades_astronomy_per_student <- complete |>
   filter(
     course == "Astronomy and Celestial Navigation",
     !is.na(grade)) |>
-  summarise(n_grades = n(), .by = c(id, group)) |>
+  summarise(n_grades = n(), .by = c(id, group, sex)) |>
   arrange(as.integer(as.character(id))) |>
-  rename(`Student ID` = id, Group = group,
+  rename(`Student ID` = id, Group = group, Sex = sex,
          `Number of grades in Astronomy and Celestial Navigation` = n_grades)
 
 grades_astronomy_per_student |>
@@ -221,5 +221,16 @@ grades_astronomy_per_student |>
   labs(x = "Group", y = "Number of grades in Astronomy and Celestial Navigation")
 ```
 
+### Question 18 
 
+```{r}
+grades_astronomy_per_student |>
+  mutate(Group = factor(Group,
+    levels = sort(unique(as.integer(as.character(Group)))))) |>
+  ggplot(aes(x = Group,
+    y = `Number of grades in Astronomy and Celestial Navigation`)) +
+  geom_boxplot() +
+  facet_wrap(vars(Sex), ncol = 1) +
+  labs(x = "Group", y = "Number of Grades in Astronomy and C. N.")
+```
 
