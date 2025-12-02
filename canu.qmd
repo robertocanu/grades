@@ -19,7 +19,9 @@ library(vroom)
 library(readr)
 library(lubridate)
 ```
-The link to the github repository is:[https://github.com/robertocanu/grades]
+You can find the GitHub repository here:  
+[GitHub: robertocanu/grades](https://github.com/robertocanu/grades)
+
 
 
 # INTRODUCTION
