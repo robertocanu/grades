@@ -89,11 +89,21 @@ students |>
 
 ### Question 7 
 ```{r}
+students <- students |>
+  mutate(age = time_length(today() - birth_date, unit = "year")) 
+
 students |>
-  mutate(age = time_length(today() - birth_date, unit = "year")) |>
   ggplot(aes(x = age)) +
   geom_density(bw = "sj") +
   geom_rug(alpha = 0.1) +
   labs(x = "Age", y = "Density")
+```
+
+### Question 8 
+```{r}
+students |>
+  summarise(median_age = round(median(age)), .by = group) |>
+  arrange(as.integer(as.character(group))) |> 
+  knitr::kable()
 ```
 
