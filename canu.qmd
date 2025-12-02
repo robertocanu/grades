@@ -170,8 +170,14 @@ grades_per_student <- complete |>
     `Number of grades` = n_grades)
 
 grades_per_student |>
-  slice_head(n = 10) |>
+  summarise(
+    Minimum = min(`Number of grades`),
+    Maximum = max(`Number of grades`),
+    Average = mean(`Number of grades`),
+    Median  = median(`Number of grades`)) |>
+  tidyr::pivot_longer(everything(), names_to = "Statistic") |>
   knitr::kable()
+
 ```
 
 
