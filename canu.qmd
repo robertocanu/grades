@@ -355,4 +355,15 @@ final_grades |>
   labs(x = "Group", y = "Final grade")
 ```
 
+### Question 25
+```{r}
+final_grades |>
+  mutate(group = factor(group,
+                        levels = sort(unique(as.integer(as.character(group)))))) |>
+  ggplot(aes(x = sex, y = final_grade)) +
+  geom_boxplot() +
+  facet_wrap(vars(group), ncol = 6) +
+  labs(x = "Sex", y = "Final grade")
+```
+
 
