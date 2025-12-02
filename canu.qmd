@@ -1,9 +1,12 @@
 ---
 title: "canu"
 author: "Roberto Canu"
-format: html
+format:
+  html:
+    code-fold: false
+    message: false
+    warning: false
 editor: visual
-message: false
 ---
 
 ```{r}
@@ -72,4 +75,12 @@ students |>
   labs(x = "Group", y = "Count")
 ```
 
+### Question 6 
+```{r}
+students |>
+  summarise(n = n(), .by = c(group, sex)) |>
+  ggplot(aes(x = as.integer(as.character(group)), y = n, fill = sex)) +
+  geom_col(position="fill") +
+  labs(x = "Group", y = "Gender Balance")
 
+```
