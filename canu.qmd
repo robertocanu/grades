@@ -210,5 +210,16 @@ grades_astronomy_per_student |>
   labs(x = "Number of grades", y = "Number of students")
 ```
 
+### Question 17 
+```{r}
+grades_astronomy_per_student |>
+  mutate(Group = factor(Group,
+    levels = sort(unique(as.integer(as.character(Group)))))) |>
+  ggplot(aes(x = Group,
+    y = `Number of grades in Astronomy and Celestial Navigation`)) +
+  geom_boxplot() +
+  labs(x = "Group", y = "Number of grades in Astronomy and Celestial Navigation")
+```
+
 
 
