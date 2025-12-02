@@ -199,5 +199,16 @@ grades_astronomy_per_student |>
   knitr::kable()
 ```
 
+### Question 16 
+```{r}
+grades_astronomy_per_student |>
+  summarise(n_students = n(), .by = `Number of grades in Astronomy and Celestial Navigation`) |>
+  ggplot(aes(
+    x = `Number of grades in Astronomy and Celestial Navigation`,
+    y = n_students)) +
+  geom_col(fill='darkblue') +
+  labs(x = "Number of grades", y = "Number of students")
+```
+
 
 
