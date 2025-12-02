@@ -162,21 +162,12 @@ complete |>
 
 ### Question 13
 ```{r}
-grades_per_student <-
-  complete |>
+grades_per_student <- complete |>
   filter(!is.na(grade)) |>
-  summarise(
-    n_grades = n(),
-    .by = c(id, group, sex)
-  ) |>
+  summarise(n_grades = n(), .by = c(id, group, sex)) |>
   arrange(as.integer(as.character(id))) |>
-  rename(
-    `Student ID` = id,
-    Group = group,
-    Sex = sex,
-    `Number of grades` = n_grades
-  )
-
+  rename(`Student ID` = id, Group = group, Sex = sex,
+    `Number of grades` = n_grades)
 
 grades_per_student |>
   slice_head(n = 10) |>
@@ -187,9 +178,26 @@ grades_per_student |>
 ### Question 14
 ```{r}
 grades_per_student |>
-    ggplot(aes(x = `Number of grades`, fill = factor(Sex))) + 
+  ggplot(aes(x = `Number of grades`, fill = factor(Sex))) + 
   geom_density(bw = 1, alpha = 0.3) +
   labs(x = "Number of grades", y = "Density", fill = "Sex")
 ```
+
+### Question 15
+```{r}
+grades_astronomy_per_student <- complete |>
+  filter(
+    course == "Astronomy and Celestial Navigation",
+    !is.na(grade)) |>
+  summarise(n_grades = n(), .by = c(id, group)) |>
+  arrange(as.integer(as.character(id))) |>
+  rename(`Student ID` = id, Group = group,
+         `Number of grades in Astronomy and Celestial Navigation` = n_grades)
+
+grades_astronomy_per_student |>
+  slice_head(n = 10) |>
+  knitr::kable()
+```
+
 
 
