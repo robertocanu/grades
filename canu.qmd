@@ -274,3 +274,16 @@ pivoted_avg_grades_per_student |>
     y = "Average grade in Art and Symbolism")
 ```
 
+### Question 21
+```{r}
+pivoted_avg_grades_per_student |>
+  summarise(
+    correlation = cor(
+      `Astronomy and Celestial Navigation`,
+      `Tribal Lore and Traditions`),
+    .by = group) |>
+  arrange(as.integer(as.character(group))) |>
+  slice_head(n = 5) |>
+  knitr::kable()
+```
+
