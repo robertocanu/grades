@@ -120,11 +120,30 @@ students |>
 
 ### Question 10 
 ```{r}
-nb_grades <- grades |> 
-  filter(!is.na(grade))
+ngrades <- grades |> 
+  filter(!is.na(grade)) |> nrow()
 ```
-The data set contains `r nrow(nb_grades)` grades.
+The data set contains **`r ngrades`** grades.
 
 
+### Question 11
+```{r}
+grades_courses <-
+  left_join(grades, courses,
+    by = join_by(course_id))
+
+complete <- left_join(grades_courses, students,
+                      by = join_by(id))
+
+complete |>
+  filter(course == "Art and Symbolism",
+         !is.na(grade)) |>
+  summarise(average_grade = mean(grade), .by = group) |>
+  ggplot(aes(x = as.integer(as.character(group)), y = average_grade)) +
+  geom_col(fill="darkblue") +
+  labs(x = "Group",
+       y = "Av. grade in Art and Symbolism")
+
+```
 
 
