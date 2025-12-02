@@ -1,0 +1,13 @@
+---
+title: "canu"
+author: "Roberto Canu"
+format: html
+editor: visual
+message: false
+
+---
+
+```{r}
+here::i_am("grades.Rproj")
+library(here)
+```
