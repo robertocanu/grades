@@ -314,3 +314,35 @@ pivoted_avg_grades_per_student |>
   )
 ```
 
+### Question 23
+```{r}
+final_grades <-
+  left_join(
+    pivoted_avg_grades_per_student,
+    students |> select(id, sex),
+    by = join_by(id)
+  ) |>
+  mutate(
+    final_grade = (
+      `Art and Symbolism` +
+      `Astronomy and Celestial Navigation` +
+      `Environmental Stewardship` +
+      `Herbalism and Medicine` +
+      `Hunting and Gathering Skills` +
+      `Language and Linguistics` +
+      `Shamanism and Spiritual Practices` +
+      `Social Organization and Governance` +
+      `Tribal Lore and Traditions` +
+      `Warfare and Diplomacy`
+    ) / 10
+  ) |>
+  select(id, group, sex, final_grade) |>
+  arrange(desc(final_grade))
+
+final_grades |>
+  slice_head(n = 5) |>
+  knitr::kable()
+```
+
+
+
