@@ -19,7 +19,16 @@ library(vroom)
 
 ## Study organisation
 
+### Question 1
+
 ```{r}
 courses <- vroom(here("datafold", "courses.csv"))
+```
+## Question 2 
+
+```{r}
+courses |>
+  arrange(course) |>
+  knitr::kable()
 ```
 
