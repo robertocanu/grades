@@ -116,5 +116,15 @@ students |>
   knitr::kable()
 ```
 
+# Simple grade analysis
+
+### Question 10 
+```{r}
+nb_grades <- grades |> 
+  filter(!is.na(grade))
+```
+The data set contains `r nrow(nb_grades)` grades.
+
+
 
 
