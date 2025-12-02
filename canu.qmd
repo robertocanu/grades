@@ -50,5 +50,14 @@ students <- read_delim(
 
 The `birth_date` column of the `students` data frame is of class *`r class(students$birth_date)`*.
 
+## 1.3 Grades 
 
+### Question 4 
+```{r}
+grades <- read_delim(
+  here("datafold", "grades.csv"),
+  delim = ":",
+  na = "_"
+)
+```
 
