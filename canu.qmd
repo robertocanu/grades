@@ -257,6 +257,14 @@ pivoted_avg_grades_per_student |>
 ```
 
 
+### Question 20
+```{r}
+pivoted_avg_grades_per_student |>
+  ggplot(aes(x = `Astronomy and Celestial Navigation`,
+    y = `Art and Symbolism`)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(x = "Average grade in Astronomy and Celestial Navigation",
+    y = "Average grade in Art and Symbolism")
 ```
-
 
