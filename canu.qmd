@@ -13,6 +13,7 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(vroom)
+library(readr)
 ```
 
 # INTRODUCTION
@@ -31,4 +32,23 @@ courses |>
   arrange(course) |>
   knitr::kable()
 ```
+
+## 1.2 Students 
+
+### Question 3
+
+```{r}
+students <- read_delim(
+  here("datafold", "students.csv"),
+  col_types = cols(
+    birth_date = col_date(),
+    group = col_factor(),
+    id = col_integer()
+  )
+)
+```
+
+The `birth_date` column of the `students` data frame is of class *`r class(students$birth_date)`*.
+
+
 
