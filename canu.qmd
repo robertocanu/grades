@@ -365,5 +365,48 @@ final_grades |>
   facet_wrap(vars(group), ncol = 6) +
   labs(x = "Sex", y = "Final grade")
 ```
+### Question 26
+
+```{r}
+avg_grades_per_student <-
+  complete |>
+  filter(!is.na(grade)) |>
+  summarise(
+    mean_grade = mean(grade),
+    .by = c(id, group, semester, course)
+  )
+
+pass_df <-
+  avg_grades_per_student |>
+  summarise(
+    final_grade = mean(mean_grade),
+    min_course  = min(mean_grade),
+    .by = c(id, group)
+  ) |>
+  left_join(
+    avg_grades_per_student |>
+      summarise(sem_mean = mean(mean_grade),
+                .by = c(id, group, semester)) |>
+      tidyr::pivot_wider(
+        names_from  = semester,
+        values_from = sem_mean,
+        names_prefix = "sem"
+      ),
+    by = join_by(id, group)
+  ) |>
+  mutate(
+    pass = (min_course >= 5 &
+            sem1 >= 10 &
+            sem2 >= 10)
+  ) |>
+  select(id, group, final_grade, pass) |>
+  arrange(desc(final_grade))
+
+pass_df |>
+  slice_head(n = 5) |>
+  knitr::kable()
+```
+
+
 
 
