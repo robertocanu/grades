@@ -234,3 +234,29 @@ grades_astronomy_per_student |>
   labs(x = "Group", y = "Number of Grades in Astronomy and C. N.")
 ```
 
+# Grade analysis
+
+### Question 19
+```{r}
+avg_grades_per_student <-
+  complete |>
+  filter(!is.na(grade)) |>
+  summarise(
+    mean_grade = mean(grade),
+    .by = c(id, group, course))
+
+pivoted_avg_grades_per_student <- avg_grades_per_student |>
+  tidyr::pivot_wider(
+    names_from  = course,
+    values_from = mean_grade) |>
+  arrange(as.integer(as.character(id)))
+
+pivoted_avg_grades_per_student |>
+  slice_head(n = 5) |>
+  knitr::kable()
+```
+
+
+```
+
+
