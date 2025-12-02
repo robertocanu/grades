@@ -419,10 +419,22 @@ The number of students having a final grade equal or larger than 10 that didn't 
 ### Question 28
 ```{r}
 pass_df |>
+  mutate(group = factor(group,
+                        levels = sort(unique(as.integer(as.character(group)))))) |>
   summarise(pass_rate = mean(pass), .by = group) |>
   ggplot(aes(x = group, y = pass_rate)) +
   geom_col(fill='darkblue') +
   labs(x = "Group", y = "Pass rate")
 ```
+
+### Question 29 
+```{r}
+avg_grades_per_student |>
+  filter(mean_grade < 5) |>
+  summarise(n = n(), .by = course) |>
+  arrange(desc(n)) |>
+  knitr::kable()
+```
+
 
 
