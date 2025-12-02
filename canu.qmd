@@ -60,4 +60,16 @@ grades <- read_delim(
   na = "_"
 )
 ```
+# Student Population analysis
+
+### Question 5
+
+```{r}
+students |>
+  summarise(n = n(), .by = group) |>
+  ggplot(aes(x = as.integer(as.character(group)), y = n)) +
+  geom_col() +
+  labs(x = "Group", y = "Count")
+```
+
 
