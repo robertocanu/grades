@@ -17,6 +17,7 @@ library(dplyr)
 library(tidyr)
 library(vroom)
 library(readr)
+library(lubridate)
 ```
 
 # INTRODUCTION
@@ -84,3 +85,15 @@ students |>
   labs(x = "Group", y = "Gender Balance")
 
 ```
+
+
+### Question 7 
+```{r}
+students |>
+  mutate(age = time_length(today() - birth_date, unit = "year")) |>
+  ggplot(aes(x = age)) +
+  geom_density(bw = "sj") +
+  geom_rug(alpha = 0.1) +
+  labs(x = "Age", y = "Density")
+```
+
