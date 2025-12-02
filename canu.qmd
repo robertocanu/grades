@@ -408,5 +408,12 @@ pass_df |>
 ```
 
 
+### Question 27
+```{r}
+not_pass <- pass_df |>
+  filter(!pass, final_grade >= 10) |>
+  summarise(n = n()) 
+```
+The number of students having a final grade equal or larger than 10 that didn't pass is **`r not_pass`**.
 
 
