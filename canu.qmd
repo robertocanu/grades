@@ -146,4 +146,12 @@ complete |>
 
 ```
 
+### Question 12 
+```{r}
+complete |>
+  filter(!is.na(grade)) |>
+  ggplot(aes(x = grade, fill = factor(semester))) + geom_density(bw = 1, alpha = 0.3) +
+  labs(x = "Grade", y = "Density", fill = "Semester")
+```
+
 
